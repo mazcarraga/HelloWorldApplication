@@ -28,6 +28,10 @@ class ClasslistsController < ApplicationController
       if @classlist.save
         @classlist.section.increment!(:number_of_students)
         @classlist.student.increment!(:number_of_units, @classlist.section.subject.number_of_units)
+
+        totalAssessment = (@classlist.student.number_of_units * 2500) + 15000
+        @classlist.student.update(total_assessment: totalAssessment)
+
         format.html { redirect_to @classlist, notice: "Classlist was successfully created." }
         format.json { render :show, status: :created, location: @classlist }
       else
@@ -56,6 +60,8 @@ class ClasslistsController < ApplicationController
     @classlist.section.decrement!(:number_of_students)
     @classlist.student.decrement!(:number_of_units, @classlist.section.subject.number_of_units)
 
+    totalAssessment = (@classlist.student.number_of_units * 2500) + 15000
+    @classlist.student.update(total_assessment: totalAssessment)
     respond_to do |format|
       format.html { redirect_to classlists_path, notice: "Classlist was successfully destroyed.", status: :see_other }
       format.json { head :no_content }
