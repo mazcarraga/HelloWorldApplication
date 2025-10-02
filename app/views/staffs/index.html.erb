@@ -1,0 +1,27 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>List of Staffs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Monthly Salary</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @staffs.each do |staff| %>
+      <tr>
+        <td><%= staff.name %></td>
+        <td><%= staff.email %></td>
+        <td><%= staff.monthly_salary %></td>
+        <td><%= staff.status %></td>
+        <td><%= link_to "Show this staff", staff %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "New staff", new_staff_path %>
