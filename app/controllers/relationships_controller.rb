@@ -25,8 +25,8 @@ class RelationshipsController < ApplicationController
 
     respond_to do |format|
       if @relationship.save
-        @relationsip.guardian.update(:number_of_students)
-        @relationsip.student.update(:number_of_guardians)
+        @relationship.guardian.update(number_of_students: @relationship.guardian.relationships.count)
+        @relationship.student.update(number_of_guardians: @relationship.student.relationships.count)
 
         format.html { redirect_to @relationship, notice: "Relationship was successfully created." }
         format.json { render :show, status: :created, location: @relationship }
@@ -53,8 +53,8 @@ class RelationshipsController < ApplicationController
   # DELETE /relationships/1 or /relationships/1.json
   def destroy
     @relationship.destroy!
-    @relationsip.guardian.update(:number_of_students)
-    @relationsip.student.update(:number_of_guardians)
+    @relationship.guardian.update(number_of_students: @relationship.guardian.relationships.count)
+    @relationship.student.update(number_of_guardians: @relationship.student.relationships.count)
 
     respond_to do |format|
       format.html { redirect_to relationships_path, notice: "Relationship was successfully destroyed.", status: :see_other }
