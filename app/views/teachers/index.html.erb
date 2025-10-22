@@ -1,9 +1,7 @@
-<p style="color: green"><%= notice %></p>
+<h1 class="mb-3">Teachers</h1>
 
-<h1>List of Teachers</h1>
-
-<table>
-  <thead>
+<table class="table table-bordered table-striped table-hover">
+  <thead class="table-dark">
     <tr>
       <th>Name</th>
       <th>Email</th>
@@ -23,10 +21,14 @@
         <td><%= teacher.status %></td>
         <td><%= teacher.number_of_units %></td>
         <td><%= teacher.monthly_salary %></td>
-        <td><%= link_to "Show this teacher", teacher %></td>
+        <td>
+          <%= link_to "Show", teacher, class: "btn btn-sm btn-primary" %>
+          <%= link_to "Edit", edit_teacher_path(teacher), class: "btn btn-sm btn-warning" %>
+          <%= link_to "Delete", teacher, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-danger" %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to "New teacher", new_teacher_path %>
+<%= link_to "New teacher", new_teacher_path, class: "btn btn-warning mt-3" %>
